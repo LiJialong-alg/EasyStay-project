@@ -1,0 +1,301 @@
+/* 变量定义 */
+page {
+  --ctrip-blue: #0086F6;
+  --ctrip-orange: #FF6600;
+  --bg-color: #F5F7FA;
+  --text-main: #333333;
+  --text-sub: #666666;
+  --text-light: #CCCCCC;
+  --border-color: #EEEEEE;
+}
+
+.order-container {
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  padding: 20rpx;
+  padding-bottom: env(safe-area-inset-bottom);
+  box-sizing: border-box;
+}
+
+/* 1. 顶部行程卡片 */
+.trip-card {
+  background: white;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.03);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 顶部蓝色装饰条 */
+.trip-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8rpx;
+  height: 100%;
+  background-color: var(--ctrip-blue);
+}
+
+.trip-header {
+  margin-bottom: 30rpx;
+}
+
+.hotel-name {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: var(--text-main);
+  margin-bottom: 8rpx;
+}
+
+.room-desc {
+  font-size: 24rpx;
+  color: var(--text-sub);
+}
+
+.trip-dates {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #F8FBFF;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  margin-bottom: 24rpx;
+}
+
+.date-col {
+  display: flex;
+  flex-direction: column;
+}
+.date-col.right { align-items: flex-end; }
+
+.d-label { font-size: 22rpx; color: var(--text-sub); margin-bottom: 4rpx; }
+.d-val { font-size: 30rpx; font-weight: 700; color: var(--text-main); }
+
+.date-arrow {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20rpx;
+}
+
+.nights-badge {
+  font-size: 20rpx;
+  color: var(--ctrip-blue);
+  background: white;
+  padding: 2rpx 12rpx;
+  border-radius: 20rpx;
+  border: 1px solid rgba(0, 134, 246, 0.2);
+  margin-bottom: -10rpx;
+  z-index: 1;
+}
+
+.line {
+  width: 100%;
+  height: 2rpx;
+  background-color: #ddd;
+}
+
+.trip-sub-info {
+  display: flex;
+  gap: 16rpx;
+}
+
+.info-tag {
+  font-size: 22rpx;
+  color: var(--text-sub);
+  display: flex;
+  align-items: center;
+  gap: 4rpx;
+}
+.info-tag.green { color: #00B87A; }
+
+/* 2. 通用表单卡片 */
+.form-card {
+  background: white;
+  border-radius: 20rpx;
+  padding: 0 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.03);
+}
+
+.card-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  padding: 30rpx 0 10rpx 0;
+  color: var(--text-main);
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  min-height: 100rpx;
+  border-bottom: 1px solid var(--border-color);
+}
+.input-row:last-child { border-bottom: none; }
+
+.label {
+  width: 160rpx;
+  font-size: 28rpx;
+  color: var(--text-sub);
+}
+
+.input {
+  flex: 1;
+  height: 100rpx;
+  font-size: 28rpx;
+  color: var(--text-main);
+}
+
+.ph-style {
+  color: var(--text-light);
+}
+
+.icon-contact {
+  color: var(--ctrip-blue);
+  font-size: 36rpx;
+  padding: 10rpx;
+}
+
+/* 3. 备注文本域 */
+.textarea-box {
+  padding-bottom: 30rpx;
+  position: relative;
+}
+
+.custom-textarea {
+  width: 100%;
+  height: 160rpx;
+  background-color: #F9F9F9;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  font-size: 26rpx;
+  box-sizing: border-box;
+  color: var(--text-main);
+}
+
+.word-count {
+  position: absolute;
+  bottom: 40rpx;
+  right: 20rpx;
+  font-size: 22rpx;
+  color: var(--text-light);
+}
+
+/* 4. 价格明细卡片 */
+.price-card {
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+}
+
+.p-label { font-size: 26rpx; color: var(--text-sub); }
+.p-val { font-size: 26rpx; color: var(--text-main); }
+.p-val.orange { color: var(--ctrip-orange); }
+
+.divider {
+
+  /* background-color: var(--border-color); */
+  margin: 20rpx 0;
+  border: #666666 1px solid;
+  /* border-style: dashed; */
+}
+
+.total-row .p-label { font-size: 30rpx; font-weight: bold; }
+.total-row .p-val { font-size: 32rpx; font-weight: bold; color: var(--ctrip-orange); }
+
+/* 5. 底部悬浮栏 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 110rpx;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30rpx;
+  padding-bottom: env(safe-area-inset-bottom);
+  box-shadow: 0 -2rpx 10rpx rgba(0,0,0,0.05);
+  z-index: 100;
+}
+
+.bar-left {
+  display: flex;
+  align-items: baseline;
+}
+
+.total-box {
+  color: var(--ctrip-orange);
+  margin-right: 16rpx;
+}
+
+.total-box .symbol { font-size: 28rpx; font-weight: bold; }
+.total-box .amount { font-size: 48rpx; font-weight: bold; }
+
+.detail-trigger {
+  margin-right: 10rpx;
+  font-size: 24rpx;
+  color: var(--text-sub);
+}
+
+.submit-btn {
+  background: linear-gradient(90deg, #FFA033 0%, #FF6600 100%);
+  color: white;
+  font-size: 32rpx;
+  font-weight: bold;
+  padding: 0;
+  width: 240rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 40rpx;
+  margin: 0;
+}
+
+.submit-btn:active {
+  opacity: 0.9;
+}
+
+.submit-btn[disabled] {
+  background: #ccc;
+  color: #fff;
+}
+
+/* 6. 条款部分 */
+.terms-tips {
+  background-color: #eaeaea;
+  position: fixed;
+  bottom: 130rpx; /* 位于底部栏上方 */
+  left: 0;
+  right: 0;
+  padding: 0 30rpx;
+  z-index: 90;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.check-label {
+  margin-top: 5rpx;
+  display: flex;
+  align-items: flex-start;
+  font-size: 24rpx;
+  color: var(--text-sub);
+}
+
+.text-wrapper {
+  margin-top: 10rpx;
+  margin-left: 8rpx;
+  line-height: 1.4;
+}
+
+.link {
+  color: var(--ctrip-blue);
+}

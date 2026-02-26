@@ -1,0 +1,145 @@
+/* 酒店卡片组件样式 */
+
+
+/* 酒店卡片 */
+.hotel-card {
+  background-color: #fff;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  display: flex;
+  height: 280rpx; /* 高度稍微减小一点，更精致 */
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.04);
+  /* 关键：确保宽度不超 */
+  width: 100%; 
+}
+
+.card-left {
+  width: 220rpx; /* 左侧图片宽度 */
+  height: 100%;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.hotel-image {
+  width: 100%;
+  height: 100%;
+  background-color: #eee;
+}
+.hotel-rooms {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+.room-item {
+  font-size: 11px;
+  padding: 2px 6px;
+  background-color: #f5f5f5;
+  border-radius: 3px;
+  color: #666;
+}
+.image-badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 134, 246, 0.9); /* 携程蓝背景 */
+  color: #fff;
+  font-size: 20rpx;
+  padding: 6rpx 12rpx;
+  border-bottom-right-radius: 12rpx;
+}
+
+.card-right {
+  flex: 1;
+  padding: 20rpx 24rpx; /* 调整内边距 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* 垂直分布 */
+  min-width: 0; /* 核心：防止 flex 子元素文字溢出屏幕 */
+}
+
+/* 五行元素排版优化 */
+
+/* 1. 中文名 */
+.row-cn-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: var(--text-black);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+/* 2. 英文名 */
+.row-en-name {
+  font-size: 22rpx;
+  color: var(--text-light);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: -4rpx; /* 紧贴中文名 */
+  text-transform: uppercase;
+}
+
+/* 3. 星级 */
+.row-rating {
+  display: flex;
+  align-items: center;
+  margin-top: 8rpx;
+}
+
+.row-rating .score {
+  color: var(--primary-blue);
+  font-weight: bold;
+  font-size: 30rpx; /* 分数大一点 */
+  margin-right: 12rpx;
+  font-family: 'DIN Alternate', sans-serif;
+}
+
+.row-rating .comment-count {
+  font-size: 20rpx;
+  color: var(--primary-blue);
+  background-color: rgba(0, 134, 246, 0.1); /* 浅蓝色半透明背景 */
+  padding: 4rpx 8rpx;
+  border-radius: 6rpx;
+}
+
+/* 4. 地址 */
+.row-address {
+  font-size: 22rpx;
+  color: var(--text-gray);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: auto; /* 往下挤 */
+  padding-bottom: 8rpx;
+}
+
+/* 5. 价格 */
+.row-price {
+  display: flex;
+  align-items: baseline;
+  margin-top: 4rpx;
+}
+
+.row-price .currency {
+  font-size: 24rpx;
+  color: var(--primary-blue);
+  font-weight: bold;
+  margin-right: 2rpx;
+}
+
+.row-price .amount {
+  font-size: 42rpx; /* 价格最大 */
+  color: var(--primary-blue);
+  font-weight: bold;
+  line-height: 1;
+  font-family: 'DIN Alternate', sans-serif;
+}
+
+.row-price .unit {
+  font-size: 22rpx;
+  color: var(--text-light);
+  margin-left: 4rpx;
+}
+

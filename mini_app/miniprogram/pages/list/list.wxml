@@ -1,0 +1,105 @@
+<view class="page-list">
+  
+  <view class="fixed-header" wx:if="{{ !showCalendar }}">
+    
+    <view class="search-header">
+      <view class="search-capsule">
+        <view class="capsule-left">
+          <picker mode="region" class="city-text" bindchange="onAddrChange">
+          {{ district || '选择地址' }}
+          </picker>
+          <view class="date-text" bindtap="onStartDateTap">
+            <text>{{ startDateLabel }}</text>
+            <text  wx:if="{{ startDateLabel }}">~</text>
+            <text>{{ endDateLabel }}</text>
+          </view>
+          <view class="triangle-icon">▼</view>
+        </view>
+
+        <view class="capsule-divider"></view>
+
+        <view class="capsule-middle">
+          <icon type="search" size="14" color="#999"></icon>
+          <input
+            type="text"
+            class="capsule-input"
+            placeholder="关键字/位置/星级"
+            placeholder-class="input-placeholder"
+            value="{{ keyword }}"
+            confirm-type="search"
+            bindinput="onPutChange"
+          />
+        </view>
+      </view>
+
+      <view class="header-search-btn" bindtap="onSearch">搜索</view>
+    </view>
+
+    <view class="filter-bar">
+      <view 
+        class="filter-item {{ sort === '' ? 'active' : '' }}" 
+        data-sort="" 
+        bindtap="onSortChange"
+      >
+        <text>综合推荐</text>
+      </view>
+      
+      <view 
+        class="filter-item {{ sort === 'asc' ? 'active' : '' }}" 
+        data-sort="asc" 
+        bindtap="onSortChange"
+      >
+        <text>价格最低</text>
+      </view>
+      
+      <view 
+        class="filter-item {{ sort === 'desc' ? 'active' : '' }}" 
+        data-sort="desc" 
+        bindtap="onSortChange"
+      >
+        <text>价格最高</text>
+      </view>
+      <view class="filter-item2">
+        <filterPicker bind:filterChange = "onSearch"/>
+      </view>
+    </view>
+  </view>
+
+  <scroll-view wx:if="{{ !showCalendar }}"
+    scroll-y 
+    class="hotel-list-scroll" 
+    bindscrolltolower="onReachBottom"
+    refresher-enabled
+    bindrefresherrefresh="onPullDownRefresh"
+    refresher-triggered="{{isRefresh}}"
+  >
+    <view class="hotel-list-content">
+      
+      <view wx:if="{{ loading && displayedHotels.length === 0 }}" class="skeleton-container">
+        <view class="skeleton-card" wx:for="{{4}}" wx:key="index"></view>
+      </view>
+
+      <block wx:else>
+        <view wx:for="{{displayedHotels}}" wx:key="id" class="list-item-wrapper">
+          <hotelCard item="{{item}}" />
+        </view>
+      </block>
+
+      <view class="footer-status">
+        <view wx:if="{{ loading }}" class="loading-more">
+          <view class="spinner"></view>
+          <text>正在加载更多...</text>
+        </view>
+        <view wx:if="{{ isFinished && displayedHotels.length > 0 }}" class="no-more">
+          <text>- 已经到底了 -</text>
+        </view>
+        <view wx:if="{{ !loading && displayedHotels.length === 0 }}" class="empty-state">
+          <text>暂无符合条件的酒店</text>
+        </view>
+      </view>
+
+    </view>
+  </scroll-view>
+  <!-- 日历组件 -->
+  <calendar wx:if="{{ showCalendar }}" bind:close="onCalendarClose"/>
+</view>

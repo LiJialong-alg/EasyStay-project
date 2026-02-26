@@ -1,0 +1,103 @@
+<view class="page-index">
+
+  <scroll-view scroll-y class="main-content"     
+    refresher-enabled
+    bindrefresherrefresh="onPullDownRefresh"
+    refresher-triggered="{{isRefresh}}">
+    <view class="banner-wrapper">
+      <swiper class="banner" indicator-dots="{{false}}" autoplay interval="5000" duration="800" circular>
+        <swiper-item wx:for="{{ bannerList }}" wx:key="id" data-id="{{ item.id }}" bindtap="onBannerTap">
+          <image src="{{ item.image_urls[0] }}" mode="aspectFill" />
+          <view class="banner-mask"></view> 
+          <view class="banner-text">{{ item.name }}</view>
+        </swiper-item>
+      </swiper>
+    </view>
+
+    <view class="search-card">
+      <view class="location-row">
+        <picker mode="region"  value="{{}}" bindchange="onAddressChange" class="location-picker">
+          <view class="location-content">
+            <view class="location-icon">📍</view>
+            <view class="location-text" wx:if="{{district}}">{{city}} · {{district}}</view>
+            <view class="location-text placeholder" wx:else>选择酒店地址</view>
+            
+          </view>
+        </picker>
+        <view class="location-arrow" bindtap="clearAddr">清空</view>
+        <view class="location-tips0" bindtap="getUserLocation">我的位置</view>
+        <view class="location-tips" bindtap="openMap">打开地图</view>
+      </view>
+
+      <view class="divider-line"></view>
+
+      <view class="date-section" bindtap="onStartDateTap">
+        <view class="date-col">
+          <text class="label">入住</text>
+          <text class="value">{{ startDate }}</text>
+        </view>
+        <view class="date-duration">
+          <text class="duration-line"></text>
+          <text class="duration-text">共 {{nights}} 晚</text>
+        </view>
+        <view class="date-col right-align" bindtap="onEndDateTap">
+          <text class="label">离店</text>
+          <text class="value">{{ endDate }}</text>
+        </view>
+      </view>
+
+      <view class="divider-line"></view>
+
+      <view class="filter-row">
+        <view class="input-wrapper">
+          <input
+            type="text"
+            class="search-input"
+            placeholder="关键字/位置/酒店名"
+            placeholder-class="input-placeholder"
+            value="{{ keyword }}"
+            bindinput="onSearchInput"
+            bindfocus="onSearchInput"
+          />
+        </view>
+        <view class="vertical-line"></view>
+
+        <filterPicker/>
+      </view>
+
+      <button class="search-btn" bindtap="onSearch">查 询 酒 店</button>
+
+      <view class="quick-tags">
+        <view class="tag-item" data-tag="商务" bindtap="onQuickTag">商务出行</view>
+        <view class="tag-item" data-tag="亲子" bindtap="onQuickTag">亲子游玩</view>
+        <view class="tag-item" data-tag="豪华" bindtap="onQuickTag">五星豪华</view>
+        <view class="tag-item" data-tag="经济" bindtap="onQuickTag">经济特惠</view>
+      </view>
+    </view>
+
+    <view class="recommended-section">
+      <view class="section-header">
+        <text class="title">优选推荐</text>
+        <text class="subtitle">发现品质好店</text>
+      </view>
+      
+      <view wx:if="{{ loading }}" class="loading">
+        <text>正在寻找好酒店...</text>
+      </view>
+
+      <view wx:else class="hotel-list">
+        <view wx:for="{{ recommendHotels }}" wx:key="id">
+          <hotelCard 
+            item="{{ item }}" 
+          />
+        </view>
+      </view>
+    </view>
+    
+    <view style="height: 40px;"></view>
+  </scroll-view>
+
+  <!-- 日历组件 -->
+  <calendar wx:if="{{ showCalendar }}" bind:close="onCalendarClose"/>
+
+</view>

@@ -1,0 +1,16 @@
+{
+  "name": "hotel-management-platform",
+  "version": "1.0.0",
+  "description": "Hotel Management Platform Monorepo",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:front\"",
+    "dev:backend": "cd nodejs_backend && npm run dev",
+    "dev:front": "cd manage_platform && npm run dev",
+    "install:all": "concurrently \"cd nodejs_backend && npm install\" \"cd manage_platform && npm install\"",
+    "seed": "cd nodejs_backend && npm run seed"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

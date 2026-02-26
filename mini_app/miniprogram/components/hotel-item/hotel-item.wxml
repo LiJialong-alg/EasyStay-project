@@ -1,0 +1,32 @@
+<!-- 酒店卡片组件WXML -->
+
+<view class="hotel-card" bindtap="onTap">
+  <view class="card-left">
+    <image class="hotel-image" src="{{ item.image_url }}" mode="aspectFill" />
+    <view class="image-badge">{{ item.rating >= 4.5 ? '超棒' : '推荐' }}</view>
+  </view>
+  
+  <view class="card-right">
+    <view class="row-cn-name">{{ item.name }}</view>
+    
+    <view class="row-en-name">{{ item.hotelNameEn || 'Luxury Hotel' }}</view>
+    
+    <view class="row-rating">
+      <text class="score">{{ item.star_level }}星级</text>
+      <text class="comment-count">“环境优美 服务周到”</text>
+    </view>
+    <view class="hotel-rooms">
+    <view class="room-item" wx:for="{{ item.RoomTypes }}" wx:key="index" wx:if="{{ index < 2 }}">
+      <text>{{ item.name }}</text>
+    </view>
+  </view>
+    <view class="row-address">📍 {{ item.address }}</view>
+    
+    <view class="row-price">
+      <text class="currency">¥</text>
+      <text class="amount">{{ item.minPrice }}</text>
+      <text class="unit">起</text>
+    </view>
+  </view>
+</view>
+

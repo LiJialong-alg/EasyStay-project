@@ -1,0 +1,142 @@
+/**
+ * 日历组件样式
+ */
+
+.calendar-component {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #fff;
+}
+
+/* 头部 */
+.calendar-header {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+
+.calendar-title {
+  
+  font-size: 16px;
+  font-weight: bold;
+  color: #0086F6;
+}
+
+.close-btn {
+  width: 50px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20rpx;
+  color: #999;
+  cursor: pointer;
+}
+
+/* 月份容器 */
+.months-container {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.month-section {
+  padding: 16px;
+}
+
+.month-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #0086F6;
+  margin-bottom: 12px;
+}
+
+/* 星期标题 */
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.weekday {
+  text-align: center;
+  font-size: 12px;
+  color: #999;
+  padding: 8px 0;
+}
+
+/* 日期网格 */
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.day-item {
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #000;
+  background-color: #f5f5f5;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.in-out{
+  font-size: 16rpx;
+}
+.day-item-empty {
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #000;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* 禁用日期 */
+.day-item.disabled {
+  color: #ccc;
+  background-color: #fff;
+  cursor: not-allowed;
+}
+
+
+
+/* 已选择的日期 */
+.day-item.selected {
+  background-color: #0086F6;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* 范围内的日期 */
+.day-item.in-range {
+  background-color: #ddeffe ;
+  /* color: #0086F6; */
+  color: #000;
+}
+
+/* 悬停状态 */
+.day-item:active:not(.disabled) {
+  opacity: 0.8;
+}
+
+/* 底部提示 */
+.calendar-footer {
+  padding: 12px 16px;
+  text-align: center;
+  color: #ff6b6b;
+  font-weight: bold;
+  border-top: 1px solid #eee;
+}

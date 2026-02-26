@@ -1,0 +1,366 @@
+/**
+ * 首页样式 - 修复布局版
+ */
+
+/* --- 全局变量定义 --- */
+page {
+  --primary-blue: #0086F6;       /* 携程蓝 */
+  --light-blue: #EAF4FE;         /* 浅蓝背景 */
+  --text-black: #333333;         /* 深黑 */
+  --text-gray: #666666;          /* 次级灰 */
+  --text-light: #999999;         /* 浅灰 */
+  --bg-color: #F4F6F9;           /* 页面背景 */
+  --card-radius: 16rpx;          /* 卡片圆角 */
+  
+  background-color: var(--bg-color);
+  /* 关键：防止 padding 撑大元素导致飞出屏幕 */
+  box-sizing: border-box; 
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, sans-serif;
+}
+
+/* 让所有 view 都遵循内缩盒模型，杜绝溢出 */
+view, text, image, scroll-view, input, button {
+  box-sizing: border-box;
+}
+
+.page-index {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- 主滚动容器 --- */
+.main-content {
+  flex: 1;
+  width: 100%;
+  overflow-y: auto;
+  /* 移除之前的 margin-top 和 z-index */
+}
+
+/* --- Banner 区域 (正常文档流) --- */
+.banner-wrapper {
+  width: 100%;
+  height: 360rpx; /* 适当的高度 */
+  position: relative;
+  background-color: #eee;
+}
+
+.banner {
+  width: 100%;
+  height: 100%;
+}
+
+.banner image {
+  width: 100%;
+  height: 100%;
+  display: block; /* 消除图片底部缝隙 */
+}
+
+.banner-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 70%, rgba(0,0,0,0.5) 100%);
+  pointer-events: none; /* 让点击穿透遮罩 */
+}
+
+.banner-text {
+  position: absolute;
+  bottom: 24rpx;
+  left: 30rpx;
+  color: #fff;
+  font-size: 34rpx;
+  font-weight: 600;
+  text-shadow: 0 2rpx 4rpx rgba(0,0,0,0.3);
+}
+
+/* --- 核心搜索卡片 --- */
+.search-card {
+  background-color: #fff;
+  border-radius: var(--card-radius);
+  /* 左右留出间距，不再贴边或溢出 */
+  margin: 20rpx 24rpx; 
+  padding: 30rpx 24rpx; /* 内部空间适中 */
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.05);
+  position: relative;
+  /* 如果希望稍微压一点 Banner 增加高级感，可以打开下面这行，不需要则注释掉 */
+  /* margin-top: -20rpx; */ 
+}
+
+/* 第一行：位置 */
+.location-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 24rpx;
+  border-bottom: 1rpx solid #f0f0f0; /* 自带分割线 */
+  margin-bottom: 24rpx;
+}
+
+.location-picker {
+  flex: 1; /* 占满左侧空间 */
+  margin-right: 20rpx; /* 防止碰触右侧文字 */
+}
+
+.location-content {
+  display: flex;
+  align-items: center;
+  overflow: hidden; /* 防止超长地址溢出 */
+}
+
+.location-icon {
+  font-size: 32rpx;
+  margin-right: 12rpx;
+  color: var(--text-black);
+  flex-shrink: 0; /* 防止图标被压缩 */
+}
+
+.location-text {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: var(--text-black);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.location-text.placeholder {
+  color: var(--text-light);
+  font-weight: normal;
+}
+
+.location-arrow {
+  font-size: 20rpx;
+  color: #ccc;
+  margin-right: 100rpx;
+  flex-shrink: 0;
+}
+
+.location-tips0 {
+  margin-right: 40rpx;
+  font-size: 24rpx;
+  color: var(--primary-blue);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+.location-tips {
+  font-size: 24rpx;
+  color: var(--primary-blue);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+/* 第二行：日期 */
+.date-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24rpx;
+  padding-bottom: 24rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.date-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.date-col.right-align {
+  align-items: flex-end; /* 右侧日期右对齐 */
+}
+
+.date-col .label {
+  margin: 0 80rpx;
+  font-size: 22rpx;
+  color: var(--text-light);
+  margin-bottom: 8rpx;
+}
+
+.date-col .value {
+  font-size: 36rpx; /* 日期数字加大 */
+  font-weight: bold;
+  color: var(--text-black);
+  font-family: 'DIN Alternate', sans-serif; /* 如果支持的话数字更好看 */
+}
+
+.date-duration {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 40rpx;
+}
+
+.duration-line {
+  width: 100%;
+  height: 1rpx;
+  background-color: #eee;
+}
+
+.duration-text {
+  background-color: #def0ff;
+  padding: 0 16rpx;
+  font-size: 20rpx;
+  color: var(--text-black);
+  margin-top: -14rpx;
+  border: 1rpx solid #eee;
+  border-radius: 20rpx;
+}
+
+/* 第三行：关键字 + 星级 */
+.filter-row {
+  display: flex;
+  align-items: center;
+  /* 不再使用 padding 挤压内部，让容器自适应 */
+  margin-bottom: 30rpx;
+  background-color: #f7f8fa; /* 极浅的灰色背景框 */
+  border-radius: 12rpx;
+  padding: 6rpx 20rpx; /* 内缩一点 */
+  height: 88rpx; /* 固定高度，更整齐 */
+}
+
+.input-wrapper {
+  flex: 1;
+  /* 关键：防止 flex 子元素溢出 */
+  min-width: 0; 
+}
+
+.search-input {
+  font-size: 28rpx;
+  color: var(--text-black);
+  height: 100%;
+  width: 100%;
+}
+
+.vertical-line {
+  width: 1rpx;
+  height: 32rpx;
+  background-color: #ddd;
+  margin: 0 24rpx;
+  flex-shrink: 0;
+}
+
+.star-price-wrapper {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  width: 150rpx; /* 给定宽度 */
+  flex-shrink: 0; /* 防止被挤压 */
+}
+
+.star-price-text {
+  font-size: 26rpx;
+  color: var(--text-gray);
+  margin-left: 30rpx;
+}
+
+.sub-arrow {
+  margin-right: 15rpx;
+  font-size: 18rpx;
+  color: #ccc;
+  margin-left: 6rpx;
+}
+
+/* 第四行：按钮 */
+.search-btn {
+  background: linear-gradient(90deg, #44a1ff, #0086F6);
+  color: #fff;
+  font-size: 34rpx;
+  font-weight: bold;
+  border-radius: 50rpx;
+  padding: 0; /* 清除默认 padding */
+  height: 90rpx;
+  line-height: 90rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 10rpx 20rpx rgba(0, 134, 246, 0.2);
+}
+
+.search-btn::after {
+  border: none;
+}
+
+/* 第五行：快捷标签 */
+.quick-tags {
+  display: flex;
+  justify-content: space-between; 
+  /* 确保不换行，或者换行也好看 */
+  flex-wrap: nowrap; 
+}
+
+.tag-item {
+  font-size: 22rpx;
+  color: var(--text-gray);
+  background-color: #f2f4f6;
+  padding: 12rpx 0; /* 上下 padding */
+  width: 23%; /* 四个平分，留一点间隙 */
+  text-align: center;
+  border-radius: 8rpx;
+}
+
+/* --- 推荐酒店列表 --- */
+.recommended-section {
+  padding: 0 24rpx 40rpx; /* 下部增加留白 */
+}
+
+.section-header {
+  margin-bottom: 24rpx;
+  display: flex;
+  align-items: baseline;
+  padding-left: 10rpx; /* 微调标题位置 */
+}
+
+.section-header .title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: var(--text-black);
+  margin-right: 16rpx;
+}
+
+.section-header .subtitle {
+  font-size: 24rpx;
+  color: var(--text-light);
+}
+
+.hotel-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+/* 加载文字 */
+.loading {
+  text-align: center;
+  padding: 30rpx;
+  color: #ccc;
+  font-size: 24rpx;
+}
+.select-container{
+  position: relative;
+
+}
+.selector{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color : transparent;
+  width: 80%;
+  border-radius: 0 0 20rpx 20rpx;
+  /* border: #0086F6 1px solid; */
+  border-top:none ;
+  position: absolute;
+  top: 50rpx;
+  left: 20rpx;
+  
+} 
+.select-text{
+  width: 100%;
+  text-align: center;
+  font-size: 25rpx;
+  color: #44a1ff;
+  white-space: nowrap;
+  margin-bottom: 30rpx;
+}
+

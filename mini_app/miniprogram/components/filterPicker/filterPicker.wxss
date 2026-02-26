@@ -1,0 +1,113 @@
+/* 容器 */
+.filter-container {
+  position: relative;
+  width: 100%;
+  background-color: transparent;
+  z-index: 100;
+}
+
+/* 触发器 */
+.filter-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80rpx;
+  font-size: 25rpx;
+  border-bottom: 1rpx solid #f2f2f2;
+}
+.trigger-text{
+  color: #666;
+}
+.trigger-icon{
+  color: #666
+}
+.trigger-text.active { color: #0086F6; font-weight: bold; }
+.trigger-icon { font-size: 20rpx; margin-left: 8rpx; transition: 0.3s; }
+.trigger-icon.rotate { transform: rotate(180deg); color: #0086F6; }
+
+/* 下拉面板主体 */
+.filter-panel {
+  position: absolute;
+  width: 600rpx;
+  top: 100%; 
+  left: -430rpx; 
+  background: #fff;
+  padding: 30rpx 40rpx;
+  box-sizing: border-box;
+  z-index: 200;
+  border-radius:20rpx;
+  box-shadow: 0 10rpx 30rpx rgba(0,0,0,0.1);
+}
+
+/* 标题 */
+.section-title {
+  font-size: 26rpx;
+  color: #999;
+  margin-bottom: 20rpx;
+}
+
+/* 标签行布局 */
+.tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 40rpx;
+  margin-right: -20rpx; /* 抵消最后一个margin */
+}
+
+/* 核心标签样式 */
+.tag {
+  width: 150rpx; /* 3个一排 */
+  height: 64rpx;
+  line-height: 64rpx;
+  text-align: center;
+  background: #f5f7fa;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  color: #333;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+  border: 1rpx solid transparent; /* 预留边框位防止抖动 */
+}
+
+/* 选中状态：携程蓝边框 + 浅蓝背景 */
+.tag.selected {
+  background: #ebf5ff;
+  border-color: #0086F6;
+  color: #0086F6;
+  font-weight: 500;
+}
+
+/* 底部按钮 */
+.footer-btns {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10rpx;
+}
+
+.btn-reset {
+  height: 80rpx;
+  line-height: 40rpx;
+  background: #fff;
+  color: #666;
+  font-size: 28rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 40rpx;
+}
+.btn-reset::after { border: none; }
+
+.btn-confirm {
+  height: 80rpx;
+  line-height: 50rpx;
+  background: #0086F6;
+  color: #fff;
+  font-size: 30rpx;
+  border-radius: 40rpx;
+}
+
+/* 遮罩 */
+.mask {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 90;
+}

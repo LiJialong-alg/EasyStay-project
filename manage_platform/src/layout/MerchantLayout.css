@@ -1,0 +1,59 @@
+.merchant-header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+}
+
+/* Sidebar Customization */
+.ant-layout-sider {
+  background-color: #001529 !important; /* Dark Blue Sidebar */
+}
+
+.ant-menu-dark, 
+.ant-menu-dark .ant-menu-sub, 
+.ant-layout-sider-trigger {
+  background-color: #001529 !important;
+}
+
+/* Highlight Color for Selected Menu Item */
+.ant-menu-dark .ant-menu-item-selected {
+  background-color: #1890ff !important; /* Brand Blue */
+  color: white !important;
+}
+
+/* Hover State */
+.ant-menu-dark .ant-menu-item:hover {
+  color: #1890ff !important;
+}
+
+/* Menu Text Color */
+.ant-menu-dark .ant-menu-item {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.site-layout-background {
+  background: #f0f2f5;
+}
+
+.message-list-item:hover {
+  background-color: #f5f5f5;
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}

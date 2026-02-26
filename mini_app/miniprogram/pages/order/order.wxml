@@ -1,0 +1,124 @@
+<view class="order-container">
+  
+  <view class="trip-card">
+    <view class="trip-header">
+      <view class="hotel-name">{{ hotelName }}</view>
+      <view class="room-desc">{{ roomType }}</view>
+    </view>
+    
+    <view class="trip-dates">
+      <view class="date-col">
+        <text class="d-label">入住</text>
+        <text class="d-val">{{ checkInDate }}</text>
+      </view>
+      <view class="date-arrow">
+        <text class="nights-badge">共{{ nights }}晚</text>
+        <view class="line"></view>
+      </view>
+      <view class="date-col right">
+        <text class="d-label">离店</text>
+        <text class="d-val">{{ checkOutDate }}</text>
+      </view>
+    </view>
+
+    <view class="trip-sub-info">
+      <view class="info-tag">
+        <text class="icon">🛏</text>
+        <text>{{ quantity }}间</text>
+      </view>
+      <view class="info-tag green">
+        <text class="icon">✓</text>
+        <text>免费取消</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="form-card">
+    <view class="card-title">入住信息</view>
+    
+    <view class="input-row">
+      <view class="label">住客姓名</view>
+      <input class="input" type="text" placeholder="每间只需填1人姓名" 
+             placeholder-class="ph-style"
+             value="{{ guest.name }}" bindinput="onGuestNameChange" />
+      <view class="icon-contact">👤</view>
+    </view>
+
+    <view class="input-row">
+      <view class="label">手机号码</view>
+      <input class="input" type="tel" placeholder="用于接收确认短信" 
+             placeholder-class="ph-style"
+             value="{{ guest.phone }}" bindinput="onGuestPhoneChange" />
+    </view>
+
+    <view class="input-row">
+      <view class="label">身份证号</view>
+      <input class="input" type="idcard" placeholder="入住人证件号码" 
+             placeholder-class="ph-style"
+             value="{{ guest.idNumber }}" bindinput="onIdNumberChange" />
+    </view>
+  </view>
+
+  <view class="form-card">
+    <view class="card-title">备注要求</view>
+    <view class="textarea-box">
+      <textarea class="custom-textarea" placeholder="如：尽量安排高楼层、无烟房等（视酒店房态安排）"
+      placeholder-class="ph-style"
+      value="{{ remark }}" bindinput="onRemarkChange" maxlength="100" />
+      <text class="word-count">{{ remark.length || 0 }}/100</text>
+    </view>
+  </view>
+
+  <view class="form-card price-card">
+    <view class="price-row">
+      <text class="p-label">房费 ({{quantity}}间 x {{nights}}晚)</text>
+      <text class="p-val">¥{{ roomPrice * quantity * nights }}</text>
+    </view>
+    <view class="price-row">
+      <text class="p-label">服务费</text>
+      <text class="p-val">¥0</text>
+    </view>
+    <view class="price-row highlight">
+      <text class="p-label">优惠减免</text>
+      <text class="p-val orange">-¥0</text>
+    </view>
+    <view class="divider"></view>
+    <view class="price-row total-row">
+      <text class="p-label">总计</text>
+      <text class="p-val big">¥{{ totalPrice }}</text>
+    </view>
+  </view>
+
+  <view style="height: 180rpx;"></view>
+
+  <view class="bottom-bar">
+    <view class="bar-left">
+      <view class="detail-trigger">
+        <text>总计</text>
+      </view>
+      <view class="total-box">
+        <text class="symbol">¥</text>
+        <text class="amount">{{ totalPrice }}</text>
+      </view>
+
+    </view>
+
+    <view class="bar-right">
+      <button class="submit-btn" bindtap="onSubmitOrder" disabled="{{ loading }}">
+        {{ loading ? '提交中...' : '去支付' }}
+      </button>
+    </view>
+  </view>
+
+  <view class="terms-tips">
+    <checkbox-group bindchange="onAgreeTermsChange">
+      <label class="check-label">
+        <checkbox value="{{ agreeTerms }}" checked="{{ agreeTerms }}" color="#0086F6" style="transform:scale(0.7)"/>
+        <view class="text-wrapper">
+          我已阅读并同意 <text class="link">《预订条款》</text> 和 <text class="link">《隐私政策》</text>
+        </view>
+      </label>
+    </checkbox-group>
+  </view>
+
+</view>

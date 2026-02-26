@@ -1,0 +1,45 @@
+<view class="filter-container">
+  <view class="filter-trigger" bindtap="toggleFilter">
+    <text class="trigger-text {{'active'}}">价格 / 星级</text>
+    <text class="trigger-icon {{isOpen ? 'rotate' : ''}}">▼</text>
+  </view>
+
+  <view class="filter-panel" wx:if="{{isOpen}}">
+    <view class="section">
+      <view class="section-title">价格区间</view>
+      <view class="tags-row">
+        <view 
+          class="tag {{priceIndex === index ? 'selected' : ''}}" 
+          wx:for="{{priceOptions}}" 
+          wx:key="index"
+          bindtap="selectPrice" 
+          data-index="{{index}}"
+        >
+          {{item}}
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">星级</view>
+      <view class="tags-row">
+        <view 
+          class="tag {{starIndex === index ? 'selected' : ''}}" 
+          wx:for="{{starOptions}}" 
+          wx:key="value"
+          bindtap="selectStar" 
+          data-index="{{index}}"
+        >
+          {{item}}
+        </view>
+      </view>
+    </view>
+
+    <view class="footer-btns">
+      <button class="btn-reset" bindtap="resetFilter">重置</button>
+      <button class="btn-confirm" bindtap="confirmFilter">确定</button>
+    </view>
+  </view>
+
+  <view class="mask" wx:if="{{isOpen}}" bindtap="toggleFilter"></view>
+</view>

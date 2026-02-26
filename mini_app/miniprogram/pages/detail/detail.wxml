@@ -1,0 +1,160 @@
+<view class="detail-container">
+  <view class="banner-wrapper">
+      <swiper class="banner" indicator-dots="{{false}}" autoplay interval="5000" duration="800" circular>
+        <swiper-item wx:for="{{  hotel.image_urls }}" wx:key="id">
+          <image src="{{ item }}" mode="aspectFill" />
+          <view class="banner-mask"></view> 
+        </swiper-item>
+      </swiper>
+    </view>
+
+  <view class="content-wrapper">
+    
+    <view class="card header-card">
+      <view class="hotel-title-row">
+        <text class="hotel-name">{{ hotel.name }}</text>
+        <view class="star-badge">{{ hotel.star_level}} 钻/星</view>
+      </view>
+      <view class="hotel-en-name" wx:if="{{hotel.hotelNameEn}}">{{ hotel.hotelNameEn }}</view>
+      
+      <view class="score-row">
+        <view class="score-box">
+          <text class="score-num">{{hotel.rating}}</text>
+          <text class="score-text">{{hotel.rating >= 4.5 ? '分-超棒':'分-推荐'}}</text>
+        </view>
+        <view class="review-link">
+          <text>共{{ hotel.reviews.length }}条点评</text>
+          
+        </view>
+      </view>
+
+      <view class="location-row">
+        <view class="loc-left">
+          <text class="address-text">{{ hotel.address }}</text>
+          <text class="loc-desc">距市中心直线1.2公里</text>
+        </view>
+        <view class="loc-icon-box" bindtap="openMap">
+          <text class="icon">📍</text>
+          <text class="icon-text">地图</text>
+        </view>
+      </view>
+
+      <view class="tag-row">
+        <view class="facility-tag">{{ hotel.description }}</view>
+      </view>
+    </view>
+
+    <view class="card date-card">
+      <view class="date-block in">
+        <text class="d-label">入住</text>
+        <text class="d-date">{{ checkInDate }}</text>
+      </view>
+      <view class="date-duration">
+        <text class="duration-badge">共 {{nights}} 晚</text>
+      </view>
+      <view class="date-block out">
+        <text class="d-label">离店</text>
+        <text class="d-date">{{ checkOutDate }}</text>
+      </view>
+    </view>
+
+    <view class="room-section">
+      <view class="room-list">
+        <view class="room-card {{ selectedRoomType && selectedRoomType.id === item.id ? 'active' : '' }}" 
+              wx:for="{{ hotel.RoomTypes }}" 
+              wx:key="type" 
+              bindtap="onSelectRoomType" 
+              data-roomtype="{{ item }}">
+          
+          <view class="room-img-placeholder">
+           
+            <image wx:if="{{item.image_url}}" class="room-img" src="{{item.image_url}}" mode="aspectFill"/>
+             <text wx:else>🛏️</text>
+          </view>
+          
+          <view class="room-info">
+            <view class="r-name">{{ item.name }}</view>
+            <view class="r-tags">
+              <text><text class="r-tag">{{item.bed_type}}</text></text>
+              <text><text class="r-tag" wx:for="{{(item.guest_facilities)}}" wx:key="index">{{item}}</text></text>
+              <text><text class="r-tag" wx:if="{{!item.guest_facilities}}">24小时前免费取消</text></text>
+            </view>
+            <view class="r-stock" >剩 {{ item.total_stock }} 间</view>
+          </view>
+
+          <view class="room-action">
+            <view wx:if="{{item.activity_price}}">
+              <view class="discount" >
+                <text class="currency">¥</text>
+                <text class="amount">{{ item.base_price}}</text>
+              </view>
+              <view class="r-price">
+                <text class="currency">¥</text>
+                <text class="amount">{{ item.activity_price }}</text>
+              </view>
+            </view>
+            <view class="r-price" wx:else>
+                <text class="currency">¥</text>
+                <text class="amount">{{ item.base_price }}</text>
+              </view>
+
+            <view class="book-btn-look {{ selectedRoomType && selectedRoomType.id === item.id ? 'selected' : '' }}">
+              {{ selectedRoomType && selectedRoomType.id=== item.id ? '已选' : '预订' }}
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="card review-card">
+      <view class="section-header">
+        <text class="title">住客评价</text>
+        <!-- <text class="more">查看全部 ></text> -->
+      </view>
+      <view class="review-list">
+        <view class="review-item" wx:for="{{ hotel.reviews }}" wx:key="userId" wx:if="{{index < 2}}">
+          <view class="r-user">
+            <view class="avatar">{{ item.userName[0] }}</view>
+            <view class="u-info">
+              <text class="name">{{ item.userName }}</text>
+              <text class="score">{{item.rating}}分</text>
+            </view>
+            <text class="r-date">{{ item.date }}</text>
+          </view>
+          <view class="r-content">{{ item.content }}</view>
+        </view>
+      </view>
+    </view>
+
+    <view style="height: 100px;"></view>
+  </view>
+
+  <view class="bottom-bar">
+    <view class="bar-left">
+      <block wx:if="{{ selectedRoomType }}">
+        <view class="total-price-box">
+          <text class="total-label">总价</text>
+          <text class="total-currency">¥</text>
+          <text class="total-amount">{{ selectedRoomType.base_price * quantity }}</text>
+        </view>
+        <view class="room-desc">已选: {{ selectedRoomType.name }}</view>
+      </block>
+      <block wx:else>
+        <text class="tips">请选择房型</text>
+      </block>
+    </view>
+
+    <view class="bar-right">
+      <view class="qty-control" wx:if="{{ selectedRoomType }}">
+        <view class="q-btn minus" catchtap="onDecreaseQuantity">-</view>
+        <view class="q-num">{{ quantity }}</view>
+        <view class="q-btn plus" catchtap="onIncreaseQuantity">+</view>
+      </view>
+      
+      <button class="submit-btn {{ !selectedRoomType ? 'disabled' : '' }}" bindtap="onBooking">
+        立即支付
+      </button>
+    </view>
+  </view>
+
+</view>
